@@ -22,7 +22,7 @@ import { RoutePaths } from "@pt/constants/routes";
 const PlayerInputPage: React.FC = () => {
   const [players, setPlayers] = useState<Player[]>([]);
   const { addPlayers } = usePlayersStore();
-  
+
   const navigate = useNavigate();
 
   const handleAddPlayers = (playerCount: number) => {
@@ -43,9 +43,12 @@ const PlayerInputPage: React.FC = () => {
   };
 
   const handleSubmit = () => {
-    addPlayers(players)
-    navigate(RoutePaths.PlayinGround);
-
+    if (players.find((player) => player.name === "")) {
+      alert("Please fill all the names");
+    } else {
+      addPlayers(players);
+      navigate(RoutePaths.PlayinGround);
+    }
   };
   const createPair = (players: Player[]) => {
     return players.reduce<Player[][]>((allPairs, player, index) => {
@@ -77,14 +80,14 @@ const PlayerInputPage: React.FC = () => {
           createPair(players).map((pair, pairIndex) => (
             <TeamContainer key={pairIndex}>
               {pair.map((player, index) => (
-                <PlayerContainer key={index} color={player.color}>
+                <PlayerContainer key={player.color} color={player.color}>
                   <TeamMemberInput
                     value={player.name}
                     placeholder="Name"
                     onIonChange={(e) =>
                       handleNameChange(e.detail.value!, pairIndex * 2 + index)
                     }
-                    required
+                    required={true}
                   />
                 </PlayerContainer>
               ))}
