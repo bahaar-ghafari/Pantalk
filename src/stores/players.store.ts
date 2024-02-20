@@ -1,11 +1,11 @@
 // store.ts
-import { Player } from "@pt/pages/PlayerInput/@type";
+import { IPlayer } from "@pt/pages/PlayerInput/@type";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 type PlayersState = {
-  playersIn: Player[];
-  addPlayers: (players: Player[]) => void;
+  playersIn: IPlayer[];
+  addPlayers: (players: IPlayer[]) => void;
 };
 
 export const usePlayersStore = create<PlayersState>()(

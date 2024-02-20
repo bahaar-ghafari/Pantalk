@@ -1,4 +1,4 @@
-export type Player = {
-    name: string;
-    color: string;
-  };
+export interface IPlayer {
+  name: string;
+  color: string;
+}

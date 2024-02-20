@@ -13,14 +13,14 @@ import {
   TeamContainer,
   TeamMemberInput,
 } from "./PlayerInput.style";
-import { Player } from "./@type";
+import { IPlayer } from "./@type";
 import { playerOptions, teamColors } from "@pt/constants/general";
 import { usePlayersStore } from "@pt/stores/players.store";
 import { useNavigate } from "react-router-dom";
 import { RoutePaths } from "@pt/constants/routes";
 
 const PlayerInputPage: React.FC = () => {
-  const [players, setPlayers] = useState<Player[]>([]);
+  const [players, setPlayers] = useState<IPlayer[]>([]);
   const { addPlayers } = usePlayersStore();
 
   const navigate = useNavigate();
@@ -50,8 +50,8 @@ const PlayerInputPage: React.FC = () => {
       navigate(RoutePaths.PlayinGround);
     }
   };
-  const createPair = (players: Player[]) => {
-    return players.reduce<Player[][]>((allPairs, player, index) => {
+  const createPair = (players: IPlayer[]) => {
+    return players.reduce<IPlayer[][]>((allPairs, player, index) => {
       if (index % 2 === 0) {
         allPairs.push([player, players[index + 1]]);
       }
