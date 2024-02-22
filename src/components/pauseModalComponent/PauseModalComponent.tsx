@@ -1,6 +1,6 @@
 import React from 'react';
-import PauseMenu from '@pt/components/pauseMenu/PauseMenu';
 import { TransparentModal } from './PauseModalComponent.style';
+import PauseMenu from './components/PauseMenu';
 
 interface PauseModalComponentProps {
   isOpen: boolean;

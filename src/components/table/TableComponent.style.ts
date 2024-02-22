@@ -45,7 +45,15 @@ export const CenteredWord = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 1.5rem; // Start with a reasonable mobile size
-  color: #000;
+  color: #2f2d2d;
+  background: white;
+  border-radius: 100%;
+  height: 90%;
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   @media (min-width: 768px) {
     font-size: 2rem; // Slightly larger on bigger screens
   }

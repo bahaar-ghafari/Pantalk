@@ -1,7 +1,6 @@
 import React from 'react';
-import { IonFooter } from '@ionic/react';
 import HelpButton from '@pt/components/cooldownButton/CooldownButton';
-import PanTaclkButton from '@pt/shared/panTaclkButton/PanTaclkButton';
+import PauseButton from '@pt/components/pauseButton/PauseButton';
 
 interface FooterComponentProps {
   onHelpClick: () => void;
@@ -10,12 +9,12 @@ interface FooterComponentProps {
 
 const FooterComponent: React.FC<FooterComponentProps> = ({ onHelpClick, onPauseClick }) => {
   return (
-    <IonFooter>
-      <PanTaclkButton onClick={onPauseClick}>Pause</PanTaclkButton>
+    <div>
+      <PauseButton onClick={onPauseClick}>Pause</PauseButton>
       <HelpButton onHandleButtonClick={onHelpClick}>
         Next Word
       </HelpButton>
-    </IonFooter>
+    </div>
   );
 };
 

@@ -1,11 +1,15 @@
-import React from 'react';
-import { IonButton } from '@ionic/react';
-import { GradientButton } from './PanTaclkButton.style';
+import React from "react";
+import { GradientButton } from "./PanTaclkButton.style";
 
-
-
-const PanTaclkButton: React.FC<React.ComponentProps<typeof IonButton>> = (props) => {
-  return <GradientButton {...props} />;
+export type PanTaclkButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
+const PanTaclkButton: React.FC<PanTaclkButtonProps> = (
+  props
+) => {
+  return (
+    <GradientButton {...props}>
+      <span>{props.children}</span>
+    </GradientButton>
+  );
 };
 
 export default PanTaclkButton;

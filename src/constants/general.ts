@@ -15,9 +15,4 @@ export const stylesSizes = {
   lg: "12rem",
   xlg: "15rem",
 };
-export const gradient = `radial-gradient(circle,
-  #ff573391,
-  #33ff57a6,
-  #3357ff5c,
-  #f033ff59,
-  #ffc3006b);`;
+export const gradient = `linear-gradient(to right, #FF5733, #33FF57, #3357ff9e, #F033FF, #FFC300);`;
