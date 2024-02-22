@@ -1,22 +1,26 @@
-import { IonInput } from "@ionic/react";
 import styled from "styled-components";
 
+
+export const PlayerInputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  justify-content: space-between;
+  height: 100%;
+`;
 export const TeamContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-bottom: 20px;
+  margin:1rem -10px;
 `;
 
-export const PlayerContainer = styled.div<{ color: string }>`
+export const PlayerInput = styled.input<{ color: string }>`
   flex: 1;
   border: 3px solid ${props => props.color};
   margin: 0 10px;
-  border-radius: 10px; // Rounded corners for better UI
-`;
-
-export const TeamMemberInput = styled(IonInput)`
-  --padding-start: 0;
-  --padding-end: 0;
-  --padding-top: 0;
-  --padding-bottom: 0;
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 10px;
+  margin-bottom: 10px;
 `;

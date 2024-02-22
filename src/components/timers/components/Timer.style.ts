@@ -9,4 +9,5 @@ export const TeamTimer = styled.div<{
   opacity: ${(props) => (props.isactive === 'true' ? "100%" : "30%")};
   width: ${(props) => props.width};
   transition: width 1s linear;
+  border-radius: 7px;
 `;

@@ -6,7 +6,6 @@ export const teamColors = [
   "#F033FF",
   "#FFC300",
 ]; // Ensure you have enough colors for the teams
-export const playerOptions = [2, 4, 6, 8, 10];
 export const totalTimersDuration = 300;
 export const stylesSizes = {
   xs: "3.5rem",

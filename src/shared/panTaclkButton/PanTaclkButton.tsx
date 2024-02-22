@@ -1,8 +1,8 @@
 import React from "react";
 import { GradientButton } from "./PanTaclkButton.style";
 
-export type PanTaclkButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
-const PanTaclkButton: React.FC<PanTaclkButtonProps> = (
+export type PanTalkButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
+const PanTalkButton: React.FC<PanTalkButtonProps> = (
   props
 ) => {
   return (
@@ -12,4 +12,4 @@ const PanTaclkButton: React.FC<PanTaclkButtonProps> = (
   );
 };
 
-export default PanTaclkButton;
+export default PanTalkButton;

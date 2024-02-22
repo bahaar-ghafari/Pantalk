@@ -6,7 +6,6 @@ export const StyledList = styled.div`
   flex-direction:column;
 
   & > button {
-    height: 60px;
     margin: 0.5rem;
   }
 `;
