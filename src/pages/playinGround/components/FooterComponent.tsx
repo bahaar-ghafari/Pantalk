@@ -1,20 +1,22 @@
-import React from 'react';
-import HelpButton from '@pt/components/cooldownButton/CooldownButton';
-import PauseButton from '@pt/components/pauseButton/PauseButton';
+import React from "react";
+import HelpButton from "@pt/components/cooldownButton/CooldownButton";
+import { PlayinGroundFooterContainer } from "../PlayinGround.style";
+import PanTalkButton from "@pt/shared/panTaclkButton/PanTaclkButton";
 
 interface FooterComponentProps {
-  onHelpClick: () => void;
   onPauseClick: () => void;
+  onHnadleRandomWord: () => void;
 }
 
-const FooterComponent: React.FC<FooterComponentProps> = ({ onHelpClick, onPauseClick }) => {
+const FooterComponent: React.FC<FooterComponentProps> = ({
+  onPauseClick,
+  onHnadleRandomWord,
+}) => {
   return (
-    <div>
-      <PauseButton onClick={onPauseClick}>Pause</PauseButton>
-      <HelpButton onHandleButtonClick={onHelpClick}>
-        Next Word
-      </HelpButton>
-    </div>
+    <PlayinGroundFooterContainer>
+      <PanTalkButton onClick={onPauseClick}>Pause</PanTalkButton>
+      <HelpButton onHandleClick={onHnadleRandomWord}>Next Word</HelpButton>
+    </PlayinGroundFooterContainer>
   );
 };
 

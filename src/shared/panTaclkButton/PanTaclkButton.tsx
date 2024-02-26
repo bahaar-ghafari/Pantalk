@@ -7,7 +7,7 @@ const PanTalkButton: React.FC<PanTalkButtonProps> = (
 ) => {
   return (
     <GradientButton {...props}>
-      <span>{props.children}</span>
+     {props.children}
     </GradientButton>
   );
 };

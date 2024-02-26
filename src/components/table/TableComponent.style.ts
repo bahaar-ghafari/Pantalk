@@ -19,14 +19,14 @@ export const Table = styled.div`
   }
 `;
 
-export const Player = styled.div<{ angle: number; color: string }>`
+export const Player = styled.div<{ $angle: number; $color: string }>`
   width: ${stylesSizes.xs};
   height: ${stylesSizes.xs};
   border-radius: 50%;
-  background-color: ${(props) => props.color};
+  background-color: ${(props) => props.$color};
   position: absolute;
   transform: ${(props) =>
-    `rotate(${props.angle}deg) translate(${stylesSizes.sm}) rotate(-${props.angle}deg)`};
+    `rotate(${props.$angle}deg) translate(${stylesSizes.sm}) rotate(-${props.$angle}deg)`};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -35,7 +35,7 @@ export const Player = styled.div<{ angle: number; color: string }>`
     width: ${stylesSizes.sm};
     height: ${stylesSizes.sm};
     transform: ${(props) =>
-      `rotate(${props.angle}deg) translate(${stylesSizes.lg}) rotate(-${props.angle}deg)`};
+      `rotate(${props.$angle}deg) translate(${stylesSizes.lg}) rotate(-${props.$angle}deg)`};
   }
 `;
 

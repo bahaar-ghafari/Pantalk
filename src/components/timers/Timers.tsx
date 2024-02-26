@@ -22,7 +22,7 @@ const Timers: React.FC<TimersProps> = ({ activeTeam, gameIsPaused }) => {
         <Timer
           key={team.name}
           team={team}
-          isactive={team.name === activeTeam ? "true" : "false"}
+          isActive={team.name === activeTeam}
           onTimeout={handleTimeout}
           gameIsPaused={gameIsPaused}
         />

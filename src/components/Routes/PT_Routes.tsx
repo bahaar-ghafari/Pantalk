@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import PlayinGround from "@pt/pages/playinGround/PlayinGround";
 import { RoutePaths } from "@pt/constants/routes";
 import PlayerInputPage from "@pt/pages/PlayerInput/PlayerInput";
-import Home from "@pt/pages/Home/Home";
+import Home from "@pt/pages/home/Home";
 
 const PT_Routes = () => {
   return (

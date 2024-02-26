@@ -9,14 +9,7 @@ export const GradientButton = styled.button`
   justify-content:center;
   width: 100%;
   height:60px;
-  & > span {
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color: #2f2d2d;
-  background: white;
-  width: 90%;
-  height: 80%;
-  border-radius: 10px;
-  }
+  border: none;
+  color: white;
+  font-weight: bold;
 `;

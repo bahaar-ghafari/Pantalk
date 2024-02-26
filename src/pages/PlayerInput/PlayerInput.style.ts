@@ -1,22 +1,22 @@
 import styled from "styled-components";
 
-
 export const PlayerInputContainer = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px;
   justify-content: space-between;
-  height: 100%;
+  height: 100vh;
+  box-sizing: border-box;
 `;
 export const TeamContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  margin:1rem -10px;
+  margin: 1rem -10px;
 `;
 
-export const PlayerInput = styled.input<{ color: string }>`
+export const PlayerInput = styled.input<{ $color: string }>`
   flex: 1;
-  border: 3px solid ${props => props.color};
+  border: 3px solid ${(props) => props.$color};
   margin: 0 10px;
   width: 100%;
   padding: 10px;

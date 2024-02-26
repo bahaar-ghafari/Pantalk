@@ -8,6 +8,7 @@ const PauseMenu: React.FC<{ onClose: () => void; onHome: () => void }> = ({
 }) => {
   return (
     <StyledList>
+      <h1>Game Paused</h1>
       <PanTaclkButton onClick={onClose}>
         Continue
       </PanTaclkButton>

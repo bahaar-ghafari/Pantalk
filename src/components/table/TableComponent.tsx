@@ -1,32 +1,30 @@
 import React from "react";
 import { CenteredWord, Player, Table } from "./TableComponent.style";
-import useRandomWord from "@pt/hooks/useRandomWord";
 import { IPlayer } from "@pt/pages/PlayerInput/@type";
 
-interface TableComponentProps {
+type TableComponentProps = {
   players: IPlayer[];
   rotation: number;
-  handleTableClick: () => void;
+  onHandleTableClick: () => void;
   angleIncrement: number;
-}
+  randomWord: string;
+};
 
 const TableComponent: React.FC<TableComponentProps> = ({
   players,
   rotation,
-  handleTableClick,
+  onHandleTableClick,
   angleIncrement,
+  randomWord,
 }) => {
-
-  const [randomWord,] = useRandomWord();
-
   return (
-    <Table onClick={handleTableClick}>
+    <Table onClick={onHandleTableClick}>
       <CenteredWord>{randomWord}</CenteredWord>
       {players.map((player, index) => (
         <Player
           key={player.name}
-          angle={(index * angleIncrement + rotation + 270) % 360}
-          color={player.color}
+          $angle={(index * angleIncrement + rotation + 270) % 360}
+          $color={player.color}
         >
           {player.name}
         </Player>

@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { CooldownButton } from "./CooldownButton.style";
 
-type HelpButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  onHandleButtonClick: () => void;
-};
-
-const HelpButton: React.FC<HelpButtonProps> = ({ onHandleButtonClick }) => {
+type HelpButtonProps = {
+  onHandleClick: () => void;
+} & React.ButtonHTMLAttributes<HTMLButtonElement>;
+const HelpButton: React.FC<HelpButtonProps> = ({ onHandleClick }) => {
   const [cooldown, setCooldown] = useState(0);
-
   useEffect(() => {
     let interval: string | number | NodeJS.Timeout | undefined;
     if (cooldown > 0) {
@@ -25,8 +23,7 @@ const HelpButton: React.FC<HelpButtonProps> = ({ onHandleButtonClick }) => {
 
   const handleHelpButtonClick = () => {
     if (cooldown === 0) {
-      onHandleButtonClick();
-
+      onHandleClick();
       setCooldown(2);
     }
   };
