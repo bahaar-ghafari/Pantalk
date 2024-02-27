@@ -1,0 +1,28 @@
+@font-face {
+  font-family: "Poppins";
+  src: local("Poppins"),
+    url("../fonts/Poppins-Regular.ttf") format("truetype");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Fredoka One";
+  src: local("Fredoka One"),
+    url("../fonts/FredokaOne-Regular.ttf") format("truetype");
+}
+
+body {
+  font-family: "Poppins", "Fredoka One";
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  height: 100vh;
+  scroll-behavior: smooth;
+  overflow: hidden;
+  h1,
+  h2,
+  h3,
+  p {
+    font-family: "Fredoka One";
+  }
+}
