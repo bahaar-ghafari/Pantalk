@@ -1,5 +1,5 @@
 import React from "react";
-import { GradientButton } from "./PanTaclkButton.style";
+import { GradientButton } from "./PanTalkButton.style";
 
 export type PanTalkButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
 const PanTalkButton: React.FC<PanTalkButtonProps> = (

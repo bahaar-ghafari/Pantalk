@@ -1,8 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { RoutePaths } from "@pt/constants/routes";
-import { Explaination, HomeContainer } from "./Home.style";
-import PanTalkButton from "@pt/shared/panTaclkButton/PanTaclkButton";
+import { Explanation, HomeContainer } from "./Home.style";
+import PanTalkButton from "@pt/shared/panTalkButton/PanTalkButton";
 
 const HomePage: React.FC = () => {
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ const HomePage: React.FC = () => {
   return (
     <HomeContainer>
       <h1>PanTalk</h1>
-      <Explaination>
+      <Explanation>
         "Pan-Talk" is a riveting game of wits and words for teams of two, each
         identified by a unique color. Players select categories and take turns
         when their name reaches the circle's bottom. The challenge is to
@@ -24,7 +24,7 @@ const HomePage: React.FC = () => {
         a team's timer runs out, they lose the round, adding an exciting race
         against time. It's a thrilling blend of quick thinking, clever
         communication, and strategic gameplay! 🕒🚫🗣️.
-      </Explaination>
+      </Explanation>
       <PanTalkButton onClick={startGame}>Start Game</PanTalkButton>
     </HomeContainer>
   );

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { TeamTimer } from "./Timer.style";
-import { totalTimersDuration } from "@pt/constants/general";
+import { GameStatus, totalTimersDuration } from "@pt/constants/general";
 
 const Timer: React.FC<{
   isActive: boolean;
@@ -8,21 +8,21 @@ const Timer: React.FC<{
     name: string;
     timeRemaining: number;
   };
-  gameIsPaused: boolean;
+  gameStatus: GameStatus;
   onTimeout: () => void;
-}> = ({ isActive, onTimeout, team, gameIsPaused }) => {
+}> = ({ isActive, onTimeout, team, gameStatus }) => {
   const [timeRemaining, setTimeRemaining] = useState(totalTimersDuration);
 
   useEffect(() => {
     let interval: string | number | NodeJS.Timeout | undefined;
 
-    if (isActive && timeRemaining > 0) {
+    if ([GameStatus.gaming].includes(gameStatus) && isActive && timeRemaining > 0) {
       interval = setInterval(() => {
         setTimeRemaining((prevTime) => (prevTime > 0 ? prevTime - 1 : 0));
       }, 1000);
     }
     // Stop the timer when the game is paused
-    if (gameIsPaused && interval) {
+    if ([GameStatus.pause].includes(gameStatus) && interval) {
       clearInterval(interval);
     }
 
@@ -34,13 +34,13 @@ const Timer: React.FC<{
     return () => {
       if (interval) clearInterval(interval);
     };
-  }, [isActive, timeRemaining, onTimeout]);
+  }, [isActive, timeRemaining, onTimeout,gameStatus]);
 
   // Calculate the width based on remaining time
   const widthPercentage = `${(timeRemaining / totalTimersDuration) * 100}%`;
 
   return (
-    <TeamTimer width={widthPercentage} $isActive={isActive} color={team.name}>
+    <TeamTimer width={widthPercentage} $isActive={isActive && [GameStatus.gaming].includes(gameStatus)} color={team.name}>
       {timeRemaining}
     </TeamTimer>
   );

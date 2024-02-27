@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-export const PlayinGroundFooterContainer = styled.div`  
+export const PlayingGroundFooterContainer = styled.div`  
 display: flex;
 `
 
-export const PlayinGroundContainer = styled.div`
+export const PlayingGroundContainer = styled.div`
 height: 100vh;
 display: flex;
 justify-content: space-between;

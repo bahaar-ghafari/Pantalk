@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { CooldownButton } from "./CooldownButton.style";
+import { HelperButton } from "./HelperButton.style";
 
 type HelpButtonProps = {
   onHandleClick: () => void;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 const HelpButton: React.FC<HelpButtonProps> = ({ onHandleClick }) => {
-  const [cooldown, setCooldown] = useState(0);
+  const [timer, setTimer] = useState(0);
   useEffect(() => {
     let interval: string | number | NodeJS.Timeout | undefined;
-    if (cooldown > 0) {
+    if (timer > 0) {
       interval = setInterval(() => {
-        setCooldown((prev) => prev - 1);
+        setTimer((prev) => prev - 1);
       }, 1000);
     }
 
@@ -19,19 +19,19 @@ const HelpButton: React.FC<HelpButtonProps> = ({ onHandleClick }) => {
         clearInterval(interval);
       }
     };
-  }, [cooldown]);
+  }, [timer]);
 
   const handleHelpButtonClick = () => {
-    if (cooldown === 0) {
+    if (timer === 0) {
       onHandleClick();
-      setCooldown(2);
+      setTimer(2);
     }
   };
 
   return (
-    <CooldownButton onClick={handleHelpButtonClick} disabled={cooldown > 0}>
-      {cooldown > 0 ? `Please wait ${cooldown}s` : "Gimme new word"}
-    </CooldownButton>
+    <HelperButton onClick={handleHelpButtonClick} disabled={timer > 0}>
+      {timer > 0 ? `Please wait ${timer}s` : "Gimme new word"}
+    </HelperButton>
   );
 };
 

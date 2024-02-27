@@ -1,6 +1,6 @@
 import React from "react";
 import { StyledList } from "./PauseMenu.style";
-import PanTaclkButton from "@pt/shared/panTaclkButton/PanTaclkButton";
+import PanTalkButton from "@pt/shared/panTalkButton/PanTalkButton";
 
 const PauseMenu: React.FC<{ onClose: () => void; onHome: () => void }> = ({
   onClose,
@@ -9,12 +9,12 @@ const PauseMenu: React.FC<{ onClose: () => void; onHome: () => void }> = ({
   return (
     <StyledList>
       <h1>Game Paused</h1>
-      <PanTaclkButton onClick={onClose}>
+      <PanTalkButton onClick={onClose}>
         Continue
-      </PanTaclkButton>
-      <PanTaclkButton onClick={onHome}>
+      </PanTalkButton>
+      <PanTalkButton onClick={onHome}>
         Home
-      </PanTaclkButton>
+      </PanTalkButton>
     </StyledList>
   );
 };

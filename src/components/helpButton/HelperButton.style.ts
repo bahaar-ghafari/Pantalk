@@ -1,7 +1,7 @@
-import PanTaclkButton from "@pt/shared/panTaclkButton/PanTaclkButton";
+import PanTalkButton from "@pt/shared/panTalkButton/PanTalkButton";
 import styled from "styled-components";
 
-export const CooldownButton = styled(PanTaclkButton)`
+export const HelperButton = styled(PanTalkButton)`
   transition: opacity 2s linear;
   min-width: 235px;
   &:disabled {

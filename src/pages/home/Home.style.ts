@@ -10,6 +10,6 @@ export const HomeContainer = styled.div`
   box-sizing: border-box;
 `;
 
-export const Explaination = styled.p`
+export const Explanation = styled.p`
   text-align: center;
 `;

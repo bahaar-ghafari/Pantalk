@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { PlayinGroundContainer } from "./PlayinGround.style";
+import { PlayingGroundContainer } from "./PlayingGround.style";
 import { usePlayersStore } from "@pt/stores/players.store";
 import Timers from "@pt/components/timers/Timers";
 import { useNavigate } from "react-router-dom";
@@ -9,36 +9,46 @@ import FooterComponent from "./components/FooterComponent";
 import PauseMenu from "./components/PauseMenu";
 import { TransparentModal } from "@pt/shared/transparentModal/TransparentModal.style";
 import useRandomWord from "@pt/hooks/useRandomWord";
+import { GameStatus } from "@pt/constants/general";
 
-const PlayinGround: React.FC = () => {
+const PlayingGround: React.FC = () => {
   const { playersIn } = usePlayersStore();
   const [rotation, setRotation] = useState(0);
   const [activePlayerIndex, setActivePlayerIndex] = useState(0);
-  const [gameIsPaused, setGameIsPaused] = useState(false);
-  const navigate = useNavigate();
+  const [gameStatus, setGameStatus] = useState(GameStatus.end);
   const [randomWord, generateRandomWord] = useRandomWord();
+  const navigate = useNavigate();
   const angleIncrement = 360 / playersIn.length;
 
   const handleTableClick = () => {
-    setRotation((prevRotation) => (prevRotation - angleIncrement + 360) % 360);
+    if (gameStatus === GameStatus.end) {
+      setGameStatus(GameStatus.gaming);
+    } else {
+      setRotation(
+        (prevRotation) => (prevRotation - angleIncrement + 360) % 360
+      );
+      setActivePlayerIndex((prevIndex) => (prevIndex + 1) % playersIn.length);
+    }
     generateRandomWord();
-    setActivePlayerIndex((prevIndex) => (prevIndex + 1) % playersIn.length);
   };
 
   const handlePauseClick = () => {
-    setGameIsPaused(!gameIsPaused);
+    if (gameStatus === GameStatus.pause) setGameStatus(GameStatus.gaming);
+    else setGameStatus(GameStatus.pause);
   };
   const handleHome = () => navigate(RoutePaths.Home);
   const rearrangePlayers = [
     ...playersIn.filter((_, index) => index % 2 === 0),
     ...playersIn.filter((_, index) => index % 2 !== 0),
   ];
-
+  const handleTimeout = () => {}
+  
   return (
-    <PlayinGroundContainer>
+    <PlayingGroundContainer>
       <Timers
         activeTeam={rearrangePlayers[activePlayerIndex].color}
-        gameIsPaused={gameIsPaused}
+        gameStatus={gameStatus}
+        onHandleTimeout={handleTimeout}
       />
       <TableComponent
         randomWord={randomWord}
@@ -49,15 +59,15 @@ const PlayinGround: React.FC = () => {
       />
       <FooterComponent
         onPauseClick={handlePauseClick}
-        onHnadleRandomWord={generateRandomWord}
+        onHandleRandomWord={generateRandomWord}
       />
-      {gameIsPaused && (
+      {[GameStatus.pause].includes(gameStatus) && (
         <TransparentModal>
           <PauseMenu onClose={handlePauseClick} onHome={handleHome} />
         </TransparentModal>
       )}
-    </PlayinGroundContainer>
+    </PlayingGroundContainer>
   );
 };
 
-export default PlayinGround;
+export default PlayingGround;

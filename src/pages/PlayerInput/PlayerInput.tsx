@@ -9,8 +9,8 @@ import { teamColors } from "@pt/constants/general";
 import { usePlayersStore } from "@pt/stores/players.store";
 import { useNavigate } from "react-router-dom";
 import { RoutePaths } from "@pt/constants/routes";
-import PanTaclkButton from "@pt/shared/panTaclkButton/PanTaclkButton";
 import PlayerCountSelector from "@pt/components/countButton/CountButton";
+import PanTalkButton from "@pt/shared/panTalkButton/PanTalkButton";
 
 const PlayerInputPage: React.FC = () => {
   const [players, setPlayers] = useState<IPlayer[]>([]);
@@ -43,7 +43,7 @@ const PlayerInputPage: React.FC = () => {
       alert("Please fill all the names");
     } else {
       addPlayers(players);
-      navigate(RoutePaths.PlayinGround);
+      navigate(RoutePaths.PlayingGround);
     }
   };
   const createPair = (players: IPlayer[]) => {
@@ -60,25 +60,28 @@ const PlayerInputPage: React.FC = () => {
         onChange={handlePlayerCountChange}
         playerCount={playerCount}
       />
+
       <div>
         {playerCount > 0 &&
           createPair(players).map((pair, pairIndex) => (
             <TeamContainer key={pairIndex}>
               {pair.map((player, index) => (
-                <PlayerInput key={player.color} color={player.color}
-                    value={player.name}
-                    placeholder="Name"
-                    onChange={(e) =>
-                      handleNameChange(e.target.value!, pairIndex * 2 + index)
-                    }
-                    required={true}
-                  />
+                <PlayerInput
+                  key={pairIndex + "" + index}
+                  $color={player.color}
+                  value={player.name}
+                  placeholder="Name"
+                  onChange={(e) =>
+                    handleNameChange(e.target.value!, pairIndex * 2 + index)
+                  }
+                  required={true}
+                />
               ))}
             </TeamContainer>
           ))}
       </div>
       {players.length > 0 && (
-        <PanTaclkButton onClick={handleSubmit}>Save Players</PanTaclkButton>
+        <PanTalkButton onClick={handleSubmit}>Save Players</PanTalkButton>
       )}
     </PlayerInputContainer>
   );

@@ -1,6 +1,6 @@
 import React from "react";
 import { CountButtonContainer, CountDisplay } from "./CountButton.style";
-import PanTalkButton from "@pt/shared/panTaclkButton/PanTaclkButton";
+import PanTalkButton from "@pt/shared/panTalkButton/PanTalkButton";
 
 type PlayerCountSelectorProps = {
   playerCount: number;
@@ -27,11 +27,14 @@ const PlayerCountSelector: React.FC<PlayerCountSelectorProps> = ({
   };
 
   return (
-    <CountButtonContainer>
-      <PanTalkButton onClick={decrementCount}>-</PanTalkButton>
-      <CountDisplay>{playerCount}</CountDisplay>
-      <PanTalkButton onClick={incrementCount}>+</PanTalkButton>
-    </CountButtonContainer>
+    <div>
+      <p>How many players are in the game?</p>
+      <CountButtonContainer>
+        <PanTalkButton onClick={decrementCount}>-</PanTalkButton>
+        <CountDisplay>{playerCount}</CountDisplay>
+        <PanTalkButton onClick={incrementCount}>+</PanTalkButton>
+      </CountButtonContainer>
+    </div>
   );
 };
 
