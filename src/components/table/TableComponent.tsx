@@ -1,9 +1,9 @@
 import React from "react";
 import { CenteredWord, Player, Table } from "./TableComponent.style";
-import { IPlayer } from "@pt/pages/PlayerInput/@type";
+import { Player } from "@pt/pages/PlayerInput/@type";
 
 type TableComponentProps = {
-  players: IPlayer[];
+  players: Player[];
   rotation: number;
   onHandleTableClick: () => void;
   angleIncrement: number;

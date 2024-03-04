@@ -1,4 +1,6 @@
 export type Team = {
-    name: string;
-    timeRemaining: number; // in seconds
-  };
+  players: string[];
+  name: string;
+  color: string;
+  timeRemaining: number; // in seconds
+};

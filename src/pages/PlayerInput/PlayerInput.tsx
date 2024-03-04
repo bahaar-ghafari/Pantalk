@@ -4,7 +4,7 @@ import {
   PlayerInputContainer,
   TeamContainer,
 } from "./PlayerInput.style";
-import { IPlayer } from "./@type";
+import { Player } from "./@type";
 import { teamColors } from "@pt/constants/general";
 import { usePlayersStore } from "@pt/stores/players.store";
 import { useNavigate } from "react-router-dom";
@@ -13,7 +13,7 @@ import PlayerCountSelector from "@pt/components/countButton/CountButton";
 import PanTalkButton from "@pt/shared/panTalkButton/PanTalkButton";
 
 const PlayerInputPage: React.FC = () => {
-  const [players, setPlayers] = useState<IPlayer[]>([]);
+  const [players, setPlayers] = useState<Player[]>([]);
   const [playerCount, setPlayerCount] = useState(0);
 
   const { addPlayers } = usePlayersStore();
@@ -46,8 +46,8 @@ const PlayerInputPage: React.FC = () => {
       navigate(RoutePaths.PlayingGround);
     }
   };
-  const createPair = (players: IPlayer[]) => {
-    return players.reduce<IPlayer[][]>((allPairs, player, index) => {
+  const createTeams = (players: Player[]) => {
+    return players.reduce<Player[][]>((allPairs, player, index) => {
       if (index % 2 === 0) {
         allPairs.push([player, players[index + 1]]);
       }
@@ -63,7 +63,7 @@ const PlayerInputPage: React.FC = () => {
 
       <div>
         {playerCount > 0 &&
-          createPair(players).map((pair, pairIndex) => (
+          createTeams(players).map((pair, pairIndex) => (
             <TeamContainer key={pairIndex}>
               {pair.map((player, index) => (
                 <PlayerInput
