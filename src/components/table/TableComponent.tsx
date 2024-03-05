@@ -1,5 +1,5 @@
 import React from "react";
-import { CenteredWord, Player, Table } from "./TableComponent.style";
+import { CenteredWord, PlayerComponent, Table } from "./TableComponent.style";
 import { Player } from "@pt/pages/PlayerInput/@type";
 
 type TableComponentProps = {
@@ -21,13 +21,13 @@ const TableComponent: React.FC<TableComponentProps> = ({
     <Table onClick={onHandleTableClick}>
       <CenteredWord>{randomWord}</CenteredWord>
       {players.map((player, index) => (
-        <Player
+        <PlayerComponent
           key={player.name}
           $angle={(index * angleIncrement + rotation + 270) % 360}
           $color={player.color}
         >
           {player.name}
-        </Player>
+        </PlayerComponent>
       ))}
     </Table>
   );

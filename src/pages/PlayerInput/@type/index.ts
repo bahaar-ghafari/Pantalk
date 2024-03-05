@@ -1,4 +1,4 @@
-export interface Player {
+export type Player = {
   name: string;
   color: string;
 }

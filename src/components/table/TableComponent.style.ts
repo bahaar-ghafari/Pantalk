@@ -19,7 +19,7 @@ export const Table = styled.div`
   }
 `;
 
-export const Player = styled.div<{ $angle: number; $color: string }>`
+export const PlayerComponent = styled.div<{ $angle: number; $color: string }>`
   width: ${stylesSizes.xs};
   height: ${stylesSizes.xs};
   border-radius: 50%;

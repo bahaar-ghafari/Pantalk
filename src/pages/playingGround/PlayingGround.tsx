@@ -10,25 +10,25 @@ import PauseMenu from "./components/PauseMenu";
 import { TransparentModal } from "@pt/shared/transparentModal/TransparentModal.style";
 import useRandomWord from "@pt/hooks/useRandomWord";
 import { GameStatus } from "@pt/constants/general";
+import GameResult from "@pt/components/gameResult/GameResult";
 
 const PlayingGround: React.FC = () => {
   const { playersIn } = usePlayersStore();
   const [rotation, setRotation] = useState(0);
   const [activePlayerIndex, setActivePlayerIndex] = useState(0);
-  const [gameStatus, setGameStatus] = useState(GameStatus.end);
+  const [gameStatus, setGameStatus] = useState(GameStatus.start);
   const [randomWord, generateRandomWord] = useRandomWord();
   const navigate = useNavigate();
   const angleIncrement = 360 / playersIn.length;
 
   const handleTableClick = () => {
-    if (gameStatus === GameStatus.end) {
-      setGameStatus(GameStatus.gaming);
-    } else {
+    if (gameStatus !== GameStatus.start) {
       setRotation(
         (prevRotation) => (prevRotation - angleIncrement + 360) % 360
       );
       setActivePlayerIndex((prevIndex) => (prevIndex + 1) % playersIn.length);
     }
+    setGameStatus(GameStatus.gaming);
     generateRandomWord();
   };
 
@@ -41,8 +41,9 @@ const PlayingGround: React.FC = () => {
     ...playersIn.filter((_, index) => index % 2 === 0),
     ...playersIn.filter((_, index) => index % 2 !== 0),
   ];
-  const handleTimeout = () => {}
-  
+  const handleTimeout = () => {
+    setGameStatus(GameStatus.end);
+  };
   return (
     <PlayingGroundContainer>
       <Timers
@@ -64,6 +65,11 @@ const PlayingGround: React.FC = () => {
       {[GameStatus.pause].includes(gameStatus) && (
         <TransparentModal>
           <PauseMenu onClose={handlePauseClick} onHome={handleHome} />
+        </TransparentModal>
+      )}
+      {[GameStatus.end].includes(gameStatus) && (
+        <TransparentModal>
+          <GameResult reMatch={handlePauseClick} onHome={handleHome} />
         </TransparentModal>
       )}
     </PlayingGroundContainer>

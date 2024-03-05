@@ -1,6 +1,6 @@
 import { usePlayersStore } from "@pt/stores/players.store";
 import Timer from "./components/Timer";
-import { GameStatus, totalTimersDuration } from "@pt/constants/general";
+import { GameStatus } from "@pt/constants/general";
 
 type TimersProps = {
   activeTeam: string;
@@ -12,20 +12,17 @@ const Timers: React.FC<TimersProps> = ({
   gameStatus,
   onHandleTimeout,
 }) => {
-  const { playersIn } = usePlayersStore();
-  const teams = playersIn
-    .filter((_, index) => index % 2 === 0)
-    .map((item) => ({ name: item.color, timeRemaining: totalTimersDuration }));
-
+  const { teams } = usePlayersStore();
   return (
     <div>
       {teams.map((team) => (
         <Timer
           key={team.name}
           team={team}
-          isActive={team.name === activeTeam}
+          isActive={team.color === activeTeam  && [GameStatus.gaming].includes(gameStatus)}
           onTimeout={onHandleTimeout}
           gameStatus={gameStatus}
+          activeTeam={activeTeam}
         />
       ))}
     </div>

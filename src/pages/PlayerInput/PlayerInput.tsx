@@ -1,25 +1,25 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import {
   PlayerInput,
   PlayerInputContainer,
   TeamContainer,
 } from "./PlayerInput.style";
 import { Player } from "./@type";
-import { teamColors } from "@pt/constants/general";
+import { teamColors, totalTimersDuration } from "@pt/constants/general";
 import { usePlayersStore } from "@pt/stores/players.store";
 import { useNavigate } from "react-router-dom";
 import { RoutePaths } from "@pt/constants/routes";
 import PlayerCountSelector from "@pt/components/countButton/CountButton";
 import PanTalkButton from "@pt/shared/panTalkButton/PanTalkButton";
+import { Team } from "@pt/components/timers/@type";
 
 const PlayerInputPage: React.FC = () => {
   const [players, setPlayers] = useState<Player[]>([]);
   const [playerCount, setPlayerCount] = useState(0);
 
-  const { addPlayers } = usePlayersStore();
+  const { addPlayers, addTeams } = usePlayersStore();
 
   const navigate = useNavigate();
-
   const handlePlayerCountChange = (playerCount: number) => {
     setPlayerCount(playerCount);
     const numberOfTeams = playerCount / 2;
@@ -38,21 +38,35 @@ const PlayerInputPage: React.FC = () => {
     setPlayers(newPlayers);
   };
 
+  const createTeams = (players: Player[]): Team[] => {
+    const teams = players.reduce<Team[]>((teams, player, index) => {
+      if (index % 2 === 0) {
+        const teamPlayers = [player, players[index + 1]].map((p) => p.name);
+        const teamColor = player.color;
+        const teamName = `${player.name} & ${players[index + 1].name}`;
+        const timeRemaining = totalTimersDuration;
+
+        teams.push({
+          players: teamPlayers,
+          name: teamName,
+          color: teamColor,
+          timeRemaining,
+        });
+      }
+      return teams;
+    }, []);
+    return teams;
+  };
+  const teams = useMemo(() => createTeams(players), [players]);
+
   const handleSubmit = () => {
     if (players.find((player) => player.name === "")) {
       alert("Please fill all the names");
     } else {
       addPlayers(players);
+      addTeams(teams);
       navigate(RoutePaths.PlayingGround);
     }
-  };
-  const createTeams = (players: Player[]) => {
-    return players.reduce<Player[][]>((allPairs, player, index) => {
-      if (index % 2 === 0) {
-        allPairs.push([player, players[index + 1]]);
-      }
-      return allPairs;
-    }, []);
   };
   return (
     <PlayerInputContainer>
@@ -63,16 +77,16 @@ const PlayerInputPage: React.FC = () => {
 
       <div>
         {playerCount > 0 &&
-          createTeams(players).map((pair, pairIndex) => (
-            <TeamContainer key={pairIndex}>
-              {pair.map((player, index) => (
+          teams.map((team, teamIndex) => (
+            <TeamContainer key={teamIndex}>
+              {team.players.map((player, index) => (
                 <PlayerInput
-                  key={pairIndex + "" + index}
-                  $color={player.color}
-                  value={player.name}
+                  key={teamIndex + "" + index}
+                  $color={team.color}
+                  value={player}
                   placeholder="Name"
                   onChange={(e) =>
-                    handleNameChange(e.target.value!, pairIndex * 2 + index)
+                    handleNameChange(e.target.value!, teamIndex * 2 + index)
                   }
                   required={true}
                 />
