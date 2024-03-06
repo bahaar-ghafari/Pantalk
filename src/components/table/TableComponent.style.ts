@@ -19,7 +19,11 @@ export const Table = styled.div`
   }
 `;
 
-export const PlayerComponent = styled.div<{ $angle: number; $color: string }>`
+export const PlayerComponent = styled.div<{
+  $angle: number;
+  $color: string;
+  $isActive: boolean;
+}>`
   width: ${stylesSizes.xs};
   height: ${stylesSizes.xs};
   border-radius: 50%;
@@ -31,6 +35,15 @@ export const PlayerComponent = styled.div<{ $angle: number; $color: string }>`
   justify-content: center;
   align-items: center;
   font-size: 0.75rem;
+  overflow: hidden;
+
+  box-shadow: ${(props) =>
+    props.$isActive
+      ? `0 0 20px 0px ${props.$color}`
+      : `inset 0px 0px 20px 0px #e9dddd`};
+
+  border: ${(props) => (props.$isActive ? `7px solid #e1ffe7` : `none`)};
+
   @media (min-width: 768px) {
     width: ${stylesSizes.sm};
     height: ${stylesSizes.sm};

@@ -1,5 +1,5 @@
 import { gradient } from "@pt/constants/general";
-import styled from "styled-components";
+import styled, { css }  from "styled-components";
 
 export const GradientButton = styled.button`
   background:${gradient}
@@ -12,4 +12,8 @@ export const GradientButton = styled.button`
   border: none;
   color: white;
   font-weight: bold;
+  ${props => props.disabled && css`
+    cursor: not-allowed;
+    opacity: 0.65;
+  `}
 `;

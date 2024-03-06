@@ -15,12 +15,14 @@ import GameResult from "@pt/components/gameResult/GameResult";
 const PlayingGround: React.FC = () => {
   const { playersIn, teams, addTeams } = usePlayersStore();
   const [rotation, setRotation] = useState(0);
-  const [activePlayerIndex, setActivePlayerIndex] = useState(0);
+  const [activePlayerIndex, setActivePlayerIndex] = useState(
+    playersIn.length / 2
+  );
   const [gameStatus, setGameStatus] = useState(GameStatus.start);
   const [randomWord, generateRandomWord] = useRandomWord();
   const navigate = useNavigate();
   const angleIncrement = 360 / playersIn.length;
-  
+
   const handleTableClick = () => {
     if (gameStatus !== GameStatus.start) {
       setRotation(
@@ -71,6 +73,7 @@ const PlayingGround: React.FC = () => {
         onHandleTimeout={handleTimeout}
       />
       <TableComponent
+        activePlayer={rearrangePlayers[activePlayerIndex].name}
         gameStatus={gameStatus}
         randomWord={randomWord}
         players={rearrangePlayers}
@@ -81,6 +84,7 @@ const PlayingGround: React.FC = () => {
       <FooterComponent
         onPauseClick={handlePauseClick}
         onHandleRandomWord={generateRandomWord}
+        gameStatus={gameStatus}
       />
       {[GameStatus.pause, GameStatus.startPause].includes(gameStatus) && (
         <TransparentModal>

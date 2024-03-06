@@ -10,6 +10,7 @@ type TableComponentProps = {
   angleIncrement: number;
   randomWord: string;
   gameStatus: GameStatus;
+  activePlayer: string;
 };
 
 const TableComponent: React.FC<TableComponentProps> = ({
@@ -19,6 +20,7 @@ const TableComponent: React.FC<TableComponentProps> = ({
   angleIncrement,
   randomWord,
   gameStatus,
+  activePlayer
 }) => {
   return (
     <Table onClick={onHandleTableClick}>
@@ -27,6 +29,7 @@ const TableComponent: React.FC<TableComponentProps> = ({
       </CenteredWord>
       {players.map((player, index) => (
         <PlayerComponent
+          $isActive={activePlayer === player.name && gameStatus === GameStatus.gaming}
           key={player.name}
           $angle={(index * angleIncrement + rotation + 270) % 360}
           $color={player.color}

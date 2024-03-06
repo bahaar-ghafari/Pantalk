@@ -8,11 +8,11 @@ export const teamColors = [
 ]; // Ensure you have enough colors for the teams
 export const totalTimersDuration = 10;
 export const stylesSizes = {
-  xs: "3.5rem",
-  sm: "6rem",
+  xs: "5rem",
+  sm: "9rem",
   md: "8rem",
-  lg: "12rem",
-  xlg: "15rem",
+  lg: "16rem",
+  xlg: "18rem",
 };
 export const gradient = `linear-gradient(to right, #FF5733, #33FF57, #3357ff9e, #F033FF, #FFC300);`;
 export enum GameStatus {
