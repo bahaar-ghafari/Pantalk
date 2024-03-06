@@ -10,24 +10,32 @@ type GameResultProps = {
 
 const GameResult: React.FC<GameResultProps> = ({ reMatch, onHome }) => {
   const { teams } = usePlayersStore();
-  const Winners = teams.reduce((maxItem, currentItem) => {
-    if (currentItem.timeRemaining > maxItem.timeRemaining) {
-      return currentItem;
-    } else {
-      return maxItem;
-    }
-  }, teams[0]);
+  const maxTimeRemaining = teams.reduce(
+    (maxTime, team) => Math.max(maxTime, team.timeRemaining),
+    0
+  );
+
+  const winners = teams.filter(
+    (team) => team.timeRemaining === maxTimeRemaining
+  );
+
   return (
     <GameResultContainer>
-      <h1> Winner: {Winners.name}</h1>
       <div>
-        {teams
-          .filter((item) => item.name !== Winners.name)
-          .map((team, index) => (
-            <p key={index}>
-              {team.name}: {team.timeRemaining} s remaining
-            </p>
+        <h1>Winners: </h1>
+        <ul>
+          {winners.map((item, index) => (
+            <li key={index}>{item.name}</li>
           ))}
+        </ul>
+      </div>
+
+      <div>
+        {teams.map((team, index) => (
+          <p key={index}>
+            {team.name}: {team.timeRemaining} s remaining
+          </p>
+        ))}
       </div>
       <ResultFooter>
         <PanTalkButton onClick={reMatch}>Rematch</PanTalkButton>

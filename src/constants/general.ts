@@ -17,6 +17,7 @@ export const stylesSizes = {
 export const gradient = `linear-gradient(to right, #FF5733, #33FF57, #3357ff9e, #F033FF, #FFC300);`;
 export enum GameStatus {
   start = 'Start',
+  startPause = 'StartPause',
   gaming = 'Gaming',
   pause = 'Pause',
   end = 'End',

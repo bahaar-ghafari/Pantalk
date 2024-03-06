@@ -19,10 +19,12 @@ const Timers: React.FC<TimersProps> = ({
         <Timer
           key={team.name}
           team={team}
-          isActive={team.color === activeTeam  && [GameStatus.gaming].includes(gameStatus)}
+          isActive={
+            team.color === activeTeam &&
+            [GameStatus.gaming].includes(gameStatus)
+          }
           onTimeout={onHandleTimeout}
           gameStatus={gameStatus}
-          activeTeam={activeTeam}
         />
       ))}
     </div>

@@ -9,18 +9,18 @@ import FooterComponent from "./components/FooterComponent";
 import PauseMenu from "./components/PauseMenu";
 import { TransparentModal } from "@pt/shared/transparentModal/TransparentModal.style";
 import useRandomWord from "@pt/hooks/useRandomWord";
-import { GameStatus } from "@pt/constants/general";
+import { GameStatus, totalTimersDuration } from "@pt/constants/general";
 import GameResult from "@pt/components/gameResult/GameResult";
 
 const PlayingGround: React.FC = () => {
-  const { playersIn } = usePlayersStore();
+  const { playersIn, teams, addTeams } = usePlayersStore();
   const [rotation, setRotation] = useState(0);
   const [activePlayerIndex, setActivePlayerIndex] = useState(0);
   const [gameStatus, setGameStatus] = useState(GameStatus.start);
   const [randomWord, generateRandomWord] = useRandomWord();
   const navigate = useNavigate();
   const angleIncrement = 360 / playersIn.length;
-
+  
   const handleTableClick = () => {
     if (gameStatus !== GameStatus.start) {
       setRotation(
@@ -31,10 +31,29 @@ const PlayingGround: React.FC = () => {
     setGameStatus(GameStatus.gaming);
     generateRandomWord();
   };
-
+  const handleRematch = () => {
+    setGameStatus(GameStatus.start);
+    addTeams(
+      teams.map((item) => {
+        return { ...item, timeRemaining: totalTimersDuration };
+      })
+    );
+  };
   const handlePauseClick = () => {
-    if (gameStatus === GameStatus.pause) setGameStatus(GameStatus.gaming);
-    else setGameStatus(GameStatus.pause);
+    switch (gameStatus) {
+      case GameStatus.startPause:
+        setGameStatus(GameStatus.start);
+        break;
+      case GameStatus.start:
+        setGameStatus(GameStatus.startPause);
+        break;
+      case GameStatus.pause:
+        setGameStatus(GameStatus.gaming);
+        break;
+      default:
+        setGameStatus(GameStatus.pause);
+        break;
+    }
   };
   const handleHome = () => navigate(RoutePaths.Home);
   const rearrangePlayers = [
@@ -52,6 +71,7 @@ const PlayingGround: React.FC = () => {
         onHandleTimeout={handleTimeout}
       />
       <TableComponent
+        gameStatus={gameStatus}
         randomWord={randomWord}
         players={rearrangePlayers}
         rotation={rotation}
@@ -62,14 +82,14 @@ const PlayingGround: React.FC = () => {
         onPauseClick={handlePauseClick}
         onHandleRandomWord={generateRandomWord}
       />
-      {[GameStatus.pause].includes(gameStatus) && (
+      {[GameStatus.pause, GameStatus.startPause].includes(gameStatus) && (
         <TransparentModal>
           <PauseMenu onClose={handlePauseClick} onHome={handleHome} />
         </TransparentModal>
       )}
       {[GameStatus.end].includes(gameStatus) && (
         <TransparentModal>
-          <GameResult reMatch={handlePauseClick} onHome={handleHome} />
+          <GameResult reMatch={handleRematch} onHome={handleHome} />
         </TransparentModal>
       )}
     </PlayingGroundContainer>

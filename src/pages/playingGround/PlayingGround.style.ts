@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const PlayingGroundFooterContainer = styled.div`  
 display: flex;
+gap:2rem;
 `
 
 export const PlayingGroundContainer = styled.div`

@@ -6,11 +6,12 @@ export const GameResultContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
 `;
 
 export const ResultFooter = styled.div`
-display: flex;
-width: 100%;
-justify-content: space-around;
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  gap: 2rem;
 `;

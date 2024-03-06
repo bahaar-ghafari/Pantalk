@@ -1,6 +1,7 @@
 import React from "react";
 import { CenteredWord, PlayerComponent, Table } from "./TableComponent.style";
 import { Player } from "@pt/pages/PlayerInput/@type";
+import { GameStatus } from "@pt/constants/general";
 
 type TableComponentProps = {
   players: Player[];
@@ -8,6 +9,7 @@ type TableComponentProps = {
   onHandleTableClick: () => void;
   angleIncrement: number;
   randomWord: string;
+  gameStatus: GameStatus;
 };
 
 const TableComponent: React.FC<TableComponentProps> = ({
@@ -16,10 +18,13 @@ const TableComponent: React.FC<TableComponentProps> = ({
   onHandleTableClick,
   angleIncrement,
   randomWord,
+  gameStatus,
 }) => {
   return (
     <Table onClick={onHandleTableClick}>
-      <CenteredWord>{randomWord}</CenteredWord>
+      <CenteredWord>
+        {gameStatus.includes(GameStatus.start) ? GameStatus.start : randomWord}
+      </CenteredWord>
       {players.map((player, index) => (
         <PlayerComponent
           key={player.name}
